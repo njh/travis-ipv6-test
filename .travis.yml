@@ -1,8 +1,20 @@
-sudo: false
+language: c
 
-os:
-  - linux
-  - osx
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: required
+    - os: linux
+      dist: trusty
+      sudo: false
+    - os: linux
+      dist: precise
+      sudo: required
+    - os: linux
+      dist: precise
+      sudo: false
+    - os: osx
 
 script:
   - /sbin/ifconfig || ip addr
