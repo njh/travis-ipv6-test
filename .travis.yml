@@ -1,4 +1,4 @@
-language: c
+language: ruby
 
 matrix:
   include:
@@ -24,6 +24,7 @@ matrix:
 script:
   - /sbin/ifconfig || ip addr
   - ping6 -c 1 ::1
+  - ruby web-server-test.rb
 
 addons:
   apt:
