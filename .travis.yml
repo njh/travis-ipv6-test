@@ -5,16 +5,21 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
+      env: NAME=trusty-vm
     - os: linux
       dist: trusty
       sudo: false
+      env: NAME=trusty-container
     - os: linux
       dist: precise
       sudo: required
+      env: NAME=precise-vm
     - os: linux
       dist: precise
       sudo: false
+      env: NAME=precise-container
     - os: osx
+      env: NAME=osx-vm
 
 script:
   - /sbin/ifconfig || ip addr
