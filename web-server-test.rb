@@ -11,7 +11,7 @@ server = WEBrick::HTTPServer.new(
 )
 
 server.mount_proc '/' do |req, res|
-  res.body = 'Hello, world!'
+  res.body = 'Got connection from: '+req.remote_ip
 end
 
 trap 'INT' do
