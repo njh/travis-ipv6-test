@@ -24,3 +24,4 @@ matrix:
 script:
   - /sbin/ifconfig || ip addr
   - ruby web-server-test.rb
+  - ruby udp-socket-test.rb
