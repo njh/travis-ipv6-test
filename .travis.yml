@@ -3,6 +3,14 @@ language: ruby
 matrix:
   include:
     - os: linux
+      dist: xenial
+      sudo: required
+      env: NAME=xenial-vm
+    - os: linux
+      dist: xenial
+      sudo: false
+      env: NAME=xenial-container
+    - os: linux
       dist: trusty
       sudo: required
       env: NAME=trusty-vm
