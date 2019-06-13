@@ -8,6 +8,11 @@ matrix:
       env: NAME=trusty-vm
     - os: linux
       dist: trusty
+      sudo: required
+      env: NAME=trusty-vm-cjdns
+      env: CJDNS=True
+    - os: linux
+      dist: trusty
       sudo: false
       env: NAME=trusty-container
     - os: linux
@@ -16,12 +21,19 @@ matrix:
       env: NAME=precise-vm
     - os: linux
       dist: precise
+      sudo: required
+      env: NAME=precise-vm-cjdns
+      env: CJDNS=True
+    - os: linux
+      dist: precise
       sudo: false
       env: NAME=precise-container
     - os: osx
       env: NAME=osx-vm
 
 script:
+  - ./cjdnsTest/test.sh start
   - /sbin/ifconfig || ip addr
   - ruby web-server-test.rb
   - ruby udp-socket-test.rb
+  - ./cjdnsTest/test.sh end
