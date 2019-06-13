@@ -30,6 +30,15 @@ First I checked if the network interfaces had IPv6 addresses allocated:
 | Mac OS X                           | Yes           | Yes             | No          |
 
 
+Cjdns trickery
+---------------
+
+You can get ::1 and a "public" address in vm (`sudo: required`) on the [cjdns](https://github.com/cjdelisle/cjdns) network using cjdroute.
+
+Check [cjdnsTest/test.sh](cjdnsTest/test.sh) for that (be care full with license, cjdns is GPL-3.0).
+
+Cjdroute binary isn't our works, this have been made by multiple contributors, find they here (and the binary source) : https://github.com/cjdelisle/cjdns.
+
 Web Server Test
 ---------------
 
