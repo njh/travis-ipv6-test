@@ -10,36 +10,31 @@ don't support IPv6 but I couldn't find some definitive answers.
 The different types of build environment are listed here:
 https://docs.travis-ci.com/user/reference/overview/
 
-You can see the results of the tests here:
+Check status
+------------
+
+See the latest build at
 https://travis-ci.org/njh/travis-ipv6-test
 
-My findings are summarised below.
+You can always fork the repo and rerun the test on your fork to get an updated status.
 
+Interpreting test results
+-------------------------
 
-Address Allocation
-------------------
+* If a job is successful, this means that in the corresponding configuration,
+IPv6 is present and works at least for the loopback interface, for TCP and UDP.
 
-First I checked if the network interfaces had IPv6 addresses allocated:
+To get more details, examine the `ifconfig` output in the build log:
 
-| Build Environment                  | IPv6 Loopback | IPv6 Link Local | IPv6 Global |
-|------------------------------------|---------------|-----------------|-------------|
-| Trusty VM         (sudo: required) | No            | No              | No          |
-| Trusty Container  (sudo: false)    | Yes           | Yes             | No          |
-| Precise VM        (sudo: required) | No            | No              | No          |
-| Precise Container (sudo: false)    | Yes           | Yes             | No          |
-| Mac OS X                           | Yes           | Yes             | No          |
+* The line `inet6 ::1 prefixlen 128` is the loopback address.
+  It means IPv6 is enabled for the loopback interface and you can use the `::1`
+  address for local tests or whatever.
 
+* A line like `inet6 fe80::<etc>` shows a
+  [link-only address](https://en.wikipedia.org/wiki/Link-local_address#IPv6)
+  for an interface.
+  If it's present, it means that IPv6 is enabled for the corresponding interface.
 
-Web Server Test
----------------
-
-Binding a web server to IPv6 localhost works for containers (`sudo: false`) and Mac OS X.
-It fails for the Linux VMs (`sudo: required`).
-
-
-UDP Socket Test
----------------
-
-Sending a UDP packet to IPv6 localhost works for containers (`sudo: false`) and Mac OS X.
-It fails for the Linux VMs (`sudo: required`).
-
+* If there's another `inet6` line for an interface with an address unlike any
+  of the above, it means the corresponding interface also has a global IPv6 address
+  (none do as of this writing, but this will hopefully change in the future.)
